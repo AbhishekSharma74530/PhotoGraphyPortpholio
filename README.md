@@ -23,9 +23,6 @@ CSS
 
 JavaScript
 
-🌐 Live Demo
-
-(Add your GitHub Pages link here)
 
 📁 Project Purpose
 
