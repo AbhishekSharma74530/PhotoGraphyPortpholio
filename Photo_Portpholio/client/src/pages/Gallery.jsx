@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FadeInSection from '../components/FadeInSection';
+import { getPhotos } from '../utils/photoStorage';
 
 const Gallery = ({ darkMode }) => {
   const [photos, setPhotos] = useState([]);
@@ -10,14 +11,24 @@ const Gallery = ({ darkMode }) => {
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
-    const storedPhotos = JSON.parse(localStorage.getItem('approvedPhotos')) || [];
-    setPhotos(storedPhotos);
+    const loadPhotos = async () => {
+      try {
+        // Load approved photos from IndexedDB
+        const approvedPhotos = await getPhotos('approved');
+        setPhotos(approvedPhotos);
 
-    const storedLikes = JSON.parse(localStorage.getItem('photoLikes')) || {};
-    setLikes(storedLikes);
+        // Load likes and comments from localStorage (keeping this as is for now)
+        const storedLikes = JSON.parse(localStorage.getItem('photoLikes')) || {};
+        setLikes(storedLikes);
 
-    const storedComments = JSON.parse(localStorage.getItem('photoComments')) || {};
-    setComments(storedComments);
+        const storedComments = JSON.parse(localStorage.getItem('photoComments')) || {};
+        setComments(storedComments);
+      } catch (error) {
+        console.error('Error loading photos:', error);
+      }
+    };
+
+    loadPhotos();
   }, []);
 
   const handleDownload = async (e, photo) => {

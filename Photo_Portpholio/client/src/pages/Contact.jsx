@@ -65,7 +65,7 @@ const Contact = ({ darkMode }) => {
         )}
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <input type="hidden" name="access_key" value="69794b69-d2ea-4d1d-a2c4-f61e669fe4c2" />
+          <input type="hidden" name="access_key" value="8055d0be-c260-4299-a7bf-77fe827fd882" />
           <input type="hidden" name="subject" value="New Contact Form Submission" />
           <input type="hidden" name="from_name" value="Photo Portfolio Contact" />
 
